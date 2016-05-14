@@ -2,9 +2,9 @@
 
 
 
-  <template is="dom-repeat" items="{{leaves}}" as="leaf">
-    <firebase-input firebase-root="https://YOUR-FIREBASE.firebaseio.com/YOUR-COLLECTION/YOUR-ITEM/LEAF-PATH" label="leaf"></firebase-input>
-  </template>
+    <template is="dom-repeat" items="{{leaves}}" as="leaf">
+      <firebase-input firebase-root="https://YOUR-FIREBASE.firebaseio.com/YOUR-COLLECTION/YOUR-ITEM/LEAF-PATH" label="leaf"></firebase-input>
+    </template>
 
 
 
