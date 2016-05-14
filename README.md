@@ -10,6 +10,6 @@
 
 In the above examplle replace YOUR-FIREBASE, YOUR-COLLECTION, YOUR-ITEM and LEAF-PATH with appropriate values from your Firebase.
 
-Leaves are the full paths to Firebase values ie https://YOUR-FIREBASE.firebaseio.com/users/name/first-name
+Leaves are the full paths to Firebase values ie https://YOUR-FIREBASE.firebaseio.com/users/FIREBASE-KEY/name/first-name
 
 The Firebase document is initiaized once the firebase-root is provided.
