@@ -3,28 +3,24 @@
 <link rel="import" href="../paper-input/paper-input.html">
 
 <!--
-`<firebase-card>` wraps the content into a flexwrap paper-card container and provides a Firebase document
+`<firebase-input>` wraps a Firebase leaf in a paper-input for editing
 
 
 
-      <firebase-card
-        firebase-root="https://YOUR-FIREBASE.firebaseio.com/YOUR-COLLECTION/"
-        document-key="{{SOME-OBJECT.__firebaseKey__}}"
-        fire-document="{{fireDocument}}">
-        <paper-input label="SOME-PROPERTY" value="{{fireDocument.SOME-PROPERTY}}"></paper-input>
-        <paper-input label="SOME-OTHER-PROPERTY" value="{{fireDocument.SOME-OTHER-PROPERTY}}"></paper-input>
-      </firebase-card>
+  <template is="dom-repeat" items="{{leaves}}" as="leaf">
+    <firebase-input firebase-root="https://YOUR-FIREBASE.firebaseio.com/YOUR-COLLECTION/YOUR-ITEM/LEAF-PATH" label="leaf"></firebase-input>
+  </template>
 
 
 
-In the above examplle replace YOUR-FIREBASE, YOUR-COLLECTION, SOME-PROPERTY, SOME-OTHER-PROPERTY with appropriate values from your Firebase.
+In the above examplle replace YOUR-FIREBASE, YOUR-COLLECTION, YOUR-ITEM and LEAF-PATH with appropriate values from your Firebase.
 
-SOME-OBJECT is any Firebase document coming from YOUR-COLLECTION, fireDocument is the document provided by firebase-card.
+Leaves are the full paths to Firebase values ie https://YOUR-FIREBASE.firebaseio.com/users/name/first-name
 
-The Firebase document is initiaized once both the firebase-root and document-key are provided.
+The Firebase document is initiaized once the firebase-root is provided.
 
 @group HekaHouse
-@element firebase-card
+@element firebase-input
 @demo demo/index.html
 -->
 
@@ -36,8 +32,9 @@ The Firebase document is initiaized once both the firebase-root and document-key
     }
   </style>
     <firebase-document
+      id="firebaseDocument"
       data="{{leafDocument}}"></firebase-document>
-    <paper-input label="{{label}}" value="{{leafDocument}}"></paper-input>
+    <paper-input id="fireInput" label="{{label}}" on-change="applyChange"></paper-input>
   </template>
 </dom-module>
 <script>
@@ -52,10 +49,26 @@ The Firebase document is initiaized once both the firebase-root and document-key
       label: {
         type: String,
         notify: true
+      },
+      leafDocument: {
+        type: Object,
+        notify: true,
+        observer: 'applyDocument'
       }
     },
     applyLocation: function(firebaseRoot) {
-      this.$.firebaseDocument.location=this.firebaseRoot;
+      if (firebaseRoot) {
+        this.$.firebaseDocument.location=this.firebaseRoot;
+      }
+    },
+    applyDocument: function(leafDocument) {
+      if (leafDocument) {
+        this.$.fireInput.value=leafDocument;
+      }
+    },
+    applyChange: function(leafDocument) {
+      var ref = new Firebase(this.firebaseRoot);
+      ref.set(this.$.fireInput.value);
     }
 
   });
