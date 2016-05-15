@@ -2,7 +2,9 @@
 
 `<firebase-input>` wraps a Firebase document value in a paper-input for editing
 
-[API Docs and Demo](http://hekahouse.github.io/firebase-input/)
+[API Docs and Demo](https://heka-house-firebase-input-demo.firebaseapp.com/)
+
+[Source](http://github.com/hekahouse/firebase-input/)
 
 The label is set to the path of the value.
 
