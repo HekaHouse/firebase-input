@@ -1,6 +1,23 @@
 {
   "name": "firebase-input",
-  "private": true,
+  "version": "1.0.0",
+  "authors": [
+    "Aron Price <aron@heka.house>"
+  ],
+  "description": "wraps the value from a firebase-document into a paper-input and labels it with the values path.",
+  "keywords": [
+    "web-component",
+    "polymer",
+    "firebase",
+    "paper-input"
+  ],
+  "main": "firebase-input.html",
+  "license": "http://polymer.github.io/LICENSE.txt",
+  "homepage": "https://HekaHouse.github.io/firebase-input/",
+  "ignore": [
+    "/.*",
+    "/test/"
+  ],
   "dependencies": {
     "polymer": "Polymer/polymer#^1.2.0",
     "firebase-element": "GoogleWebComponents/firebase-element#^1.0.12",
@@ -8,5 +25,8 @@
     "paper-button": "PolymerElements/paper-button",
     "iron-icon": "PolymerElements/iron-icon"
   },
-  "ignore": []
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "web-component-tester": "^4.0.0"
+  }
 }
