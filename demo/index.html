@@ -1,0 +1,29 @@
+  <!doctype html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+      <title>firebase-input demo</title>
+      <script src="../webcomponentsjs/webcomponents-lite.min.js"></script>
+      <link rel="import" href="../firebase-input.html">
+
+
+      <style is="custom-style" include="demo-pages-shared-styles">
+        app-header span {
+          margin: 16px;
+        }
+      </style>
+    </head>
+    <body unresolved>
+      <template is="dom-bind">
+        <app-header condenses fixed effects="resize-title blend-background waterfall">
+          <span>loads a firebase document value for display in a paper-input.</span>
+        </app-header>
+
+        <firebase-input firebase-root="https://ohio-voter.firebaseio.com/voters/43207/PRICE/ARON/name" label="/name"></firebase-input>
+
+
+
+    </template>
+  </body>
+  </html>
