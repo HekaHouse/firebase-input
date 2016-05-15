@@ -8,6 +8,10 @@
 
 The label is set to the path of the value.
 
+## Install
+
+    bower install --save HekaHouse/firebase-input
+
 ## Example
     <template is="dom-repeat" items="{{LEAVES}}" as="LEAF">
       <firebase-input
