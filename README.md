@@ -44,4 +44,4 @@ firebase-input depends only on standard polymer elements from Google
 
 ## Related
 
-firebase-input is designed for use inside of [firebase-card](https://HekaHouse.github.io/firebase-card)
+firebase-input is designed for use inside of [firebase-card](https://heka-house-firebase-card-demo.firebaseapp.com)
