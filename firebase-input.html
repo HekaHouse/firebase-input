@@ -68,39 +68,61 @@ firebase-input is designed for use inside of [firebase-card](https://heka-house-
     <firebase-document
       id="firebaseDocument"
       data="{{leafDocument}}"></firebase-document>
-    <paper-input id="fireInput" label="{{label}}" on-change="applyChange"></paper-input>
+    <paper-input id="fireInput" label="{{label}}" on-change="_applyChange"></paper-input>
   </template>
 </dom-module>
 <script>
   Polymer({
     is: 'firebase-input',
     properties: {
+      /**
+      * URL to firebase document
+      */
       firebaseRoot: {
         type: String,
         notify: true,
-        observer: 'applyLocation'
+        observer: '_applyLocation'
       },
+      /**
+      * label to apply to paper-input, corresponds to path applied to
+      * firebaseRoot
+      */
       label: {
         type: String,
         notify: true
       },
+      /**
+      * value from assigned firebase-document
+      */
       leafDocument: {
         type: Object,
         notify: true,
-        observer: 'applyDocument'
+        observer: '_applyDocument'
       }
     },
-    applyLocation: function(firebaseRoot) {
+    /**
+    * Set Firebase Document location
+    * observer for firebaseRoot
+    */
+    _applyLocation: function(firebaseRoot) {
       if (firebaseRoot) {
         this.$.firebaseDocument.location=this.firebaseRoot;
       }
     },
-    applyDocument: function(leafDocument) {
+    /**
+    * Set value for paper-input
+    * no binding is used to avoid triggering errors with firebase-document
+    */
+    _applyDocument: function(leafDocument) {
       if (leafDocument) {
         this.$.fireInput.value=leafDocument;
       }
     },
-    applyChange: function(leafDocument) {
+    /**
+    * Listen for changes to paper-input value
+    * update firebase-document via Firebase API
+    */
+    _applyChange: function(leafDocument) {
       var ref = new Firebase(this.firebaseRoot);
       ref.set(this.$.fireInput.value);
     }
