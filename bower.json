@@ -12,8 +12,8 @@
     "paper-input"
   ],
   "main": "firebase-input.html",
-  "license": "http://polymer.github.io/LICENSE.txt",
-  "homepage": "https://HekaHouse.github.io/firebase-input/",
+  "license": "https://heka-house-polymer-demos.firebaseapp.com/LICENSE",
+  "homepage": "https://github.com/HekaHouse/firebase-input/",
   "ignore": [
     "/.*",
     "/test/"

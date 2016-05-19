@@ -1,9 +1,0 @@
-{
-  "firebase": "heka-house-firebase-input-demo",
-  "public": "firebase-input-demo-site",
-  "ignore": [
-    "firebase.json",
-    "**/.*",
-    "**/node_modules/**"
-  ]
-}
