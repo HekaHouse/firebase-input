@@ -98,6 +98,14 @@ firebase-input is designed for use inside of [firebase-card](https://heka-house-
         type: Object,
         notify: true,
         observer: '_applyDocument'
+      },
+      /**
+      * value assigned
+      */
+      leafValue: {
+        type: String,
+        notify: true,
+        observer: '_applyChange'
       }
     },
     /**
@@ -125,6 +133,7 @@ firebase-input is designed for use inside of [firebase-card](https://heka-house-
     _applyChange: function(leafDocument) {
       var ref = new Firebase(this.firebaseRoot);
       ref.set(this.$.fireInput.value);
+      this.leafValue = this.$.fireInput.value;
     }
 
   });
