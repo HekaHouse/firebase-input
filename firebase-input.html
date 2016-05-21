@@ -130,10 +130,9 @@ firebase-input is designed for use inside of [firebase-card](https://heka-house-
     * Listen for changes to paper-input value
     * update firebase-document via Firebase API
     */
-    _applyChange: function(leafDocument) {
+    _applyChange: function(leafValue) {
       var ref = new Firebase(this.firebaseRoot);
-      ref.set(this.$.fireInput.value);
-      this.leafValue = this.$.fireInput.value;
+      ref.set(leafValue);
     }
 
   });
