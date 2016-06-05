@@ -33,10 +33,11 @@
       <firebase-auth
         id="auth"
         app-name="heka-house"
-        user="{{user}}"
-        on-error="showError"></firebase-auth>
+        user="{{user}}"></firebase-auth>
       <firebase-input
         app-name="heka-house"
+        user="{{user}}"
+        app="{{app}}"
         firebase-branch="/sample/Hatfield Sparks/favoriteFruit"
         label="/favoriteFruit"></firebase-input>
   </template>

@@ -101,6 +101,21 @@ firebase-input is designed for use inside of [firebase-card](https://heka-house-
         type: String,
         notify: true
       },
+
+      /**
+      * Firebase user to ensure setup
+      */
+      user: {
+        type: Object,
+        notify: true
+      },
+      /**
+      * Firebase app to ensure setup
+      */
+      app: {
+        type: Object,
+        notify: true
+      },
       /**
       * label to apply to paper-input, corresponds to path applied to
       * firebaseBranch
@@ -124,14 +139,14 @@ firebase-input is designed for use inside of [firebase-card](https://heka-house-
         notify: true
       }
     },
-    observers: ['_applyLocation(appName,firebaseBranch)'],
+    observers: ['_applyLocation(appName,firebaseBranch,user,app)'],
 
     /**
     * Set Firebase Document location
     * observer for firebaseBranch
     */
-    _applyLocation: function(appName,firebaseBranch) {
-      if (firebaseBranch && appName) {
+    _applyLocation: function(appName,firebaseBranch,user,app) {
+      if (user && app) {
         this.$.doc.path=firebaseBranch;
       }
     }
