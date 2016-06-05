@@ -1,8 +1,8 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../firebase-element/firebase-document.html">
+
 <link rel="import" href="../paper-input/paper-input.html">
 <link rel="import" href="../paper-button/paper-button.html">
-
+<link rel="import" href="../polymerfire/firebase-document.html">
 <!--
 # firebase-input
 
@@ -12,28 +12,19 @@
 
 [Source](http://github.com/hekahouse/firebase-input/)
 
-The label is set to the path of the value.
-
 ## Install
 
     bower install --save HekaHouse/firebase-input
 
 ## Example
-    <template is="dom-repeat" items="{{LEAVES}}" as="LEAF">
-      <firebase-input
-        firebase-root="https://YOUR-FIREBASE.firebaseio.com/COLLECTION/ITEM/LEAF"
-        label="leaf"></firebase-input>
-    </template>
-
-In the above examplle replace YOUR-FIREBASE, COLLECTION, ITEM and LEAF-PATH with appropriate values from your Firebase.
-
-LEAVES are a collection of the full paths to Firebase values ie:
-
-    https://YOUR-FIREBASE.firebaseio.com/users/name/first-name
+    <firebase-input
+      app-name="APP NAME FROM FIREBASE APP"
+      firebase-branch="/path/to/document"
+      label="some element"></firebase-input>
 
 ## Note
 
-The Firebase document is initiaized once the firebase-root is provided.
+The Firebase document is initiaized once the app-name and firebase-branch are provided.
 
 ## Dependencies
 
@@ -47,6 +38,8 @@ Then, go ahead and download the element's dependencies:
     bower install
 
 firebase-input depends only on standard polymer elements from Google
+
+including the pre-release [polymerfire](https://github.com/firebase/polymerfire)
 
 ## Related
 
@@ -66,9 +59,15 @@ firebase-input is designed for use inside of [firebase-card](https://heka-house-
     }
   </style>
     <firebase-document
-      id="firebaseDocument"
+      id="doc"
+      app-name="{{appName}}"
       data="{{leafDocument}}"></firebase-document>
-    <paper-input id="fireInput" label="{{label}}" on-change="_applyChange"></paper-input>
+    <paper-input
+      id="fireInput"
+      label="{{label}}"
+      value="{{leafDocument}}"
+      readonly={{readonly}}
+      disabled={{disabled}}></paper-input>
   </template>
 </dom-module>
 <script>
@@ -76,16 +75,35 @@ firebase-input is designed for use inside of [firebase-card](https://heka-house-
     is: 'firebase-input',
     properties: {
       /**
+      * passthrough to paper-input
+      */
+      disabled: {
+        type: Boolean,
+        notify: true,
+        value: false
+      },
+      readonly: {
+        type: Boolean,
+        notify: true,
+        value: false
+      },
+      /**
       * URL to firebase document
       */
-      firebaseRoot: {
+      firebaseBranch: {
         type: String,
-        notify: true,
-        observer: '_applyLocation'
+        notify: true
+      },
+      /**
+      * Firebase App name used in firebase-app
+      */
+      appName: {
+        type: String,
+        notify: true
       },
       /**
       * label to apply to paper-input, corresponds to path applied to
-      * firebaseRoot
+      * firebaseBranch
       */
       label: {
         type: String,
@@ -96,44 +114,26 @@ firebase-input is designed for use inside of [firebase-card](https://heka-house-
       */
       leafDocument: {
         type: Object,
-        notify: true,
-        observer: '_applyDocument'
+        notify: true
       },
       /**
       * value assigned
       */
       leafValue: {
         type: String,
-        notify: true,
-        observer: '_applyChange'
+        notify: true
       }
     },
+    observers: ['_applyLocation(appName,firebaseBranch)'],
+
     /**
     * Set Firebase Document location
-    * observer for firebaseRoot
+    * observer for firebaseBranch
     */
-    _applyLocation: function(firebaseRoot) {
-      if (firebaseRoot) {
-        this.$.firebaseDocument.location=this.firebaseRoot;
+    _applyLocation: function(appName,firebaseBranch) {
+      if (firebaseBranch && appName) {
+        this.$.doc.path=firebaseBranch;
       }
-    },
-    /**
-    * Set value for paper-input
-    * no binding is used to avoid triggering errors with firebase-document
-    */
-    _applyDocument: function(leafDocument) {
-      if (leafDocument) {
-        this.$.fireInput.value=leafDocument;
-      }
-    },
-    /**
-    * Listen for changes to paper-input value
-    * update firebase-document via Firebase API
-    */
-    _applyChange: function(leafValue) {
-      var ref = new Firebase(this.firebaseRoot);
-      ref.set(leafValue);
     }
-
   });
 </script>

@@ -1,31 +1,49 @@
-  <!doctype html>
-  <html>
-    <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-      <title>firebase-input demo</title>
-      <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
-      <link rel="import" href="../firebase-input.html">
-
-
-      <style is="custom-style" include="demo-pages-shared-styles">
-        app-header span {
-          margin: 16px;
-        }
-      </style>
-    </head>
-    <body unresolved>
-      <template is="dom-bind">
-        <app-header condenses fixed effects="resize-title blend-background waterfall">
-          <span>loads a firebase document value for display in a paper-input.</span>
-        </app-header>
-
-        <firebase-input
-          firebase-root="https://heka-house-polymer-demos.firebaseio.com/sample/Hatfield%20Sparks/favoriteFruit"
-          label="/favoriteFruit"></firebase-input>
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>firebase-input demo</title>
+    <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="../../polymerfire/firebase-app.html">
+    <link rel="import" href="../../polymerfire/firebase-auth.html">
+    <link rel="import" href="../firebase-input.html">
 
 
 
-    </template>
-  </body>
-  </html>
+    <style is="custom-style" include="demo-pages-shared-styles">
+      app-header span {
+        margin: 16px;
+      }
+    </style>
+  </head>
+  <body unresolved>
+    <template is="dom-bind">
+      <app-header condenses fixed effects="resize-title blend-background waterfall">
+        <span>loads a firebase document value for display in a paper-input.</span>
+      </app-header>
+      <firebase-app
+        id="app"
+        name="heka-house"
+        api-key="API-KEY"
+        auth-domain="heka-house-polymer-demos.firebaseapp.com"
+        database-url="https://heka-house-polymer-demos.firebaseio.com"
+        app="{{app}}">
+      </firebase-app>
+      <firebase-auth
+        id="auth"
+        app-name="heka-house"
+        user="{{user}}"
+        on-error="showError"></firebase-auth>
+      <firebase-input
+        app-name="heka-house"
+        firebase-branch="/sample/Hatfield Sparks/favoriteFruit"
+        label="/favoriteFruit"></firebase-input>
+  </template>
+  <script type="text/javascript">
+    document.addEventListener('WebComponentsReady', function() {
+      document.querySelector('firebase-auth').signInAnonymously();
+    });
+  </script>
+</body>
+</html>
