@@ -6,28 +6,23 @@
 
 [Source](http://github.com/hekahouse/firebase-input/)
 
-The label is set to the path of the value.
-
 ## Install
 
     bower install --save HekaHouse/firebase-input
 
 ## Example
-    <template is="dom-repeat" items="{{LEAVES}}" as="LEAF">
-      <firebase-input
-        firebase-root="https://YOUR-FIREBASE.firebaseio.com/COLLECTION/ITEM/LEAF"
-        label="leaf"></firebase-input>
-    </template>
-
-In the above examplle replace YOUR-FIREBASE, COLLECTION, ITEM and LEAF-PATH with appropriate values from your Firebase.
-
-LEAVES are a collection of the full paths to Firebase values ie:
-
-    https://YOUR-FIREBASE.firebaseio.com/users/name/first-name
+    <firebase-input
+      user="{{user}}"
+      app="{{app}}"
+      app-name="APP NAME FROM FIREBASE APP"
+      firebase-branch="/path/to/document"
+      label="some element"></firebase-input>
 
 ## Note
 
-The Firebase document is initiaized once the firebase-root is provided.
+The Firebase document is initiaized once the user and app properties are provided.
+
+These come from associated firebase-app and firebase-auth elements
 
 ## Dependencies
 
@@ -42,6 +37,10 @@ Then, go ahead and download the element's dependencies:
 
 firebase-input depends only on standard polymer elements from Google
 
+including the pre-release [polymerfire](https://github.com/firebase/polymerfire)
+
 ## Related
 
-firebase-input is designed for use inside of [firebase-card](https://heka-house-polymer-demos.firebaseapp.com/firebase-card)
+firebase-input is designed for use inside of:
+
+[firebase-card](https://heka-house-polymer-demos.firebaseapp.com/firebase-card)

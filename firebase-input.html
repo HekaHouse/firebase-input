@@ -18,13 +18,17 @@
 
 ## Example
     <firebase-input
+      user="{{user}}"
+      app="{{app}}"
       app-name="APP NAME FROM FIREBASE APP"
       firebase-branch="/path/to/document"
       label="some element"></firebase-input>
 
 ## Note
 
-The Firebase document is initiaized once the app-name and firebase-branch are provided.
+The Firebase document is initiaized once the user and app properties are provided.
+
+These come from associated firebase-app and firebase-auth elements
 
 ## Dependencies
 
@@ -43,7 +47,9 @@ including the pre-release [polymerfire](https://github.com/firebase/polymerfire)
 
 ## Related
 
-firebase-input is designed for use inside of [firebase-card](https://heka-house-polymer-demos.firebaseapp.com/firebase-card)
+firebase-input is designed for use inside of:
+
+[firebase-card](https://heka-house-polymer-demos.firebaseapp.com/firebase-card)
 
 @group HekaHouse
 @element firebase-input
@@ -101,7 +107,6 @@ firebase-input is designed for use inside of [firebase-card](https://heka-house-
         type: String,
         notify: true
       },
-
       /**
       * Firebase user to ensure setup
       */
